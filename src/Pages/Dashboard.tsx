@@ -25,7 +25,7 @@ const Dashboard: React.FC = () => {
   useEffect(() => {
     const fetchDashboardData = async () => {
       try {
-        const apiUrl = "http://127.0.0.1:5000/dashboard";
+        const apiUrl = "http://127.0.0.1:8000/dashboard";
         const Token = localStorage.getItem("Token");
         if (!Token) {
           throw new Error("Access token not found");
@@ -36,7 +36,7 @@ const Dashboard: React.FC = () => {
           salesproduct_data: ProductData[];
         }>(apiUrl, {
           headers: {
-            Authorization: ` ${Token}`,
+            Authorization: ` Bearer ${Token}`,
           },
         });
 

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import Table from 'react-bootstrap/Table';
 import axios from 'axios';
 
 
@@ -15,7 +16,7 @@ const Sales: React.FC = () => {
     useEffect(() => {
         const fetchsales = async () => {
         try {
-            const apiUrl = 'http://127.0.0.1:5000/sales';
+            const apiUrl = 'http://127.0.0.1:8000/sales';
             const Token = localStorage.getItem('Token');
             if (! Token) {
               throw new Error('Token not found');
@@ -23,7 +24,7 @@ const Sales: React.FC = () => {
     
          const response = await axios.get<Sale[]>(apiUrl, {
             headers: {
-                'Authorization': `${Token}`,
+                'Authorization': `Bearer ${Token}`,
               }
          })
             setSales(response.data);
@@ -40,17 +41,17 @@ const Sales: React.FC = () => {
     return (
         <div>
             <h2>Sales</h2>
-            <table className='sales-table'>
+            <Table striped>
                 <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Product id</th>
-                        <th>Quantity</th>
-                        <th>Time</th>
-                    </tr>
+                <tr>
+                  <th>ID</th>
+                  <th>Product id</th>
+                  <th>Quantity</th>
+                  <th>Time</th>
+                </tr>
                 </thead>
                 <tbody>
-                    {sales.map(sale => (
+                {sales.map(sale => (
                         <tr key={sale.id}>
                             <td>{sale.id}</td>
                             <td>{sale.pid}</td>
@@ -59,8 +60,11 @@ const Sales: React.FC = () => {
                         </tr>
                     ))}
                 </tbody>
-            </table>
+                </Table>
+           
         </div>
+
+        
     );
 }
 

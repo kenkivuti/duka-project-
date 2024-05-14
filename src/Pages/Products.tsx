@@ -6,6 +6,7 @@ interface Product {
   id: number;
   name: string;
   price: number;
+  quantity:number;
 }
 
 const Products: React.FC = () => {
@@ -14,7 +15,7 @@ const Products: React.FC = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const apiUrl = 'http://127.0.0.1:5000/product';
+        const apiUrl = 'http://127.0.0.1:8000/products';
         const Token = localStorage.getItem('Token');
         if (! Token) {
           throw new Error('Token not found');
@@ -22,7 +23,7 @@ const Products: React.FC = () => {
 
         const response = await axios.get<Product[]>(apiUrl, {
           headers: {
-            'Authorization': `${Token}`,
+            'Authorization': `Bearer ${Token}`,
           }
         });
 
@@ -45,6 +46,7 @@ const Products: React.FC = () => {
               <th>ID</th>
               <th>Name</th>
               <th>Price</th>
+              <th>quantity</th>
             </tr>
           </thead>
           <tbody>
@@ -53,6 +55,7 @@ const Products: React.FC = () => {
                 <td>{product.id}</td>
                 <td>{product.name}</td>
                 <td>{product.price}</td>
+                <td>{product.quantity}</td>
               </tr>
             ))}
           </tbody>
