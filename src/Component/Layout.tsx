@@ -11,7 +11,7 @@ function Layout(){
     return(
         <div className="Layout">
             <header className="layout-header">
-      <Navbar bg="dark" data-bs-theme="dark">     
+      <Navbar bg="primary" data-bs-theme="light">     
         <Container>
           <Navbar.Brand href="/">My Duka</Navbar.Brand>
           <Nav className="me-auto">
